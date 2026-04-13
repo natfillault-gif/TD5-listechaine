@@ -1,0 +1,7 @@
+<Solution>
+  <Configurations>
+    <Platform Name="x64" />
+    <Platform Name="x86" />
+  </Configurations>
+  <Project Path="TD5-listechainée/TD5-listechainée.vcxproj" Id="3f96dcb6-5acd-4847-8b80-d1d0eaeff70b" />
+</Solution>
