@@ -4,8 +4,8 @@
 
 Link* LinkedList::getLink(int position)
 {
-	if (position<0 || position>size()) {
-		throw std::out_of_range("Veuillez rentrer une position supperieure ou egale a 0 ou une position qui qui existe(pas trop grande)");
+	if (position < 0 || position > size()) {
+		throw std::out_of_range("Position invalide");
 	}
 	Link* actuel = firstLink;
 	int compteur = 0;
@@ -52,16 +52,31 @@ void LinkedList::add(int value)
 		lastLink = newLink;
 	}
 }
-void LinkedList::insert(int value, int position)
-{
-	Link* linkposition;
-	linkposition = getLink(position);
-	Link link_insert(value,linkposition->getPreviousLink(), linkposition);
-	linkposition->getPreviousLink()->setNextLink(&link_insert);
-	linkposition->setPreviousLink(&link_insert);
+void LinkedList::insert(int value, int position) {
+
+	if (position < 0 || position > size()) {
+		throw std::out_of_range("Position invalide");
+	}
+
+	Link* existingLink = getLink(position);
+	Link* prevLink = existingLink->getPreviousLink();
+	Link* newLink = new Link(value, prevLink, existingLink);
+
+	existingLink->setPreviousLink(newLink);
+
+	if (prevLink != nullptr) {
+		prevLink->setNextLink(newLink);
+	}
+	else {
+		firstLink = newLink;
+	}
 }
 void LinkedList::remove(int position)
 {
+	if (position < 0 || position > size()) {
+		throw std::out_of_range("Position invalide");
+	}
+
 	Link* linkToRemove = getLink(position);
 	if (linkToRemove == firstLink) {
 		firstLink = linkToRemove->getNextLink();
